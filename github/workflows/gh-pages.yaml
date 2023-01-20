@@ -13,5 +13,5 @@ jobs:
       - uses: subosito/flutter-action@v2
       - uses: bluefireteam/flutter-gh-pages@v8
         with:
-          baseHref: /pi3Block.github.io/
+          baseHref: /mehdi-ski/
           webRenderer: canvaskit
