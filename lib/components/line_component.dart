@@ -3,7 +3,8 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
 import 'package:flutter/material.dart';
-import '../les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
+
 import 'map_component.dart';
 
 /// Paint object for when it should be a normal line.

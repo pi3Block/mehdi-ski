@@ -1,4 +1,4 @@
-import '/database/database.dart';
+import 'package:les_mehdi_font_du_ski/database/database.dart';
 
 /// Describes the current state of the game.
 enum PlayingState {
@@ -36,5 +36,5 @@ class GameState {
   static bool playSounds = true;
 
   ///Our database for the complete game
-  static late final MehdiSkiGameDatabase database;
+  static late final MehdiSkiDatabase database;
 }

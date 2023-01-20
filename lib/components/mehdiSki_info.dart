@@ -1,6 +1,6 @@
-import '/components/mehdi_ski_joystick_player.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:les_mehdi_font_du_ski/components/mehdi_ski_joystick_player.dart';
 
 /// Draw the stats of our rocket.
 class MehdiSkiInfo extends PositionComponent with HasGameRef {

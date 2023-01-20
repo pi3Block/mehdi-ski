@@ -3,8 +3,7 @@ import 'package:flame/components.dart';
 import 'package:flame/palette.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
-
-import '../les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 class Arbre extends SpriteAnimationComponent with HasGameRef<LesMehdiFontDuSkiGame> {
   /// Indicates if this line is the end goal or not.
@@ -23,7 +22,7 @@ class Arbre extends SpriteAnimationComponent with HasGameRef<LesMehdiFontDuSkiGa
       srcSize: Vector2(164.0, 306.0),
     );
     animation = spriteSheet.createAnimation(row: 0, stepTime: 0.3, to: 6);
-    position = this.position;
+    position = position;
     size = Vector2(16, 30);
     final hitboxPaint = BasicPalette.white.paint()..style = PaintingStyle.stroke;
     add(

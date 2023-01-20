@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import '/game_state.dart';
-
-import '../les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/game_state.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 /// By using the Flutter Widgets we can handle all non-game related UI through
 /// widgets.

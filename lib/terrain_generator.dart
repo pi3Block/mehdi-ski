@@ -4,8 +4,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:les_mehdi_font_du_ski/components/arbre.dart';
 import 'package:les_mehdi_font_du_ski/components/drapeau.dart';
-
-import 'components/line_component.dart';
+import 'package:les_mehdi_font_du_ski/components/line_component.dart';
 
 /// Terrain generator.
 ///

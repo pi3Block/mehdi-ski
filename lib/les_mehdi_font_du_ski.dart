@@ -1,20 +1,18 @@
 import 'dart:math';
 
 import 'package:flame/input.dart';
+import 'package:les_mehdi_font_du_ski/components/audio_player.dart';
 import 'package:les_mehdi_font_du_ski/components/mehdiSki_info.dart';
 
-import '/overlays/joint.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
-
-import 'components/mehdi_ski_joystick_player.dart';
-import 'components/audio_player.dart';
-import 'components/mehdi_map_component.dart';
-
-import 'components/pause_component.dart';
-import 'game_state.dart';
+import 'package:les_mehdi_font_du_ski/components/mehdi_map_component.dart';
+import 'package:les_mehdi_font_du_ski/components/mehdi_ski_joystick_player.dart';
+import 'package:les_mehdi_font_du_ski/components/pause_component.dart';
+import 'package:les_mehdi_font_du_ski/game_state.dart';
+import 'package:les_mehdi_font_du_ski/overlays/joint.dart';
 
 class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTappables, HasKeyboardHandlerComponents, HasDraggables {
   int health = 2;

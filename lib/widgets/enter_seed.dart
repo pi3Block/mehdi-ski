@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 ///Show a screen to enter a seed to start playing it
 class EnterSeed extends StatelessWidget {

@@ -1,6 +1,5 @@
 import 'package:flame_audio/flame_audio.dart';
-
-import '../game_state.dart';
+import 'package:les_mehdi_font_du_ski/game_state.dart';
 
 ///Wraper to play any audio and load the assets
 class MehdiSkiGameAudioPlayer {

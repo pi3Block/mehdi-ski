@@ -1,17 +1,16 @@
 import 'dart:async';
 
-import '/widgets/enter_seed.dart';
-import '/widgets/highscore.dart';
-import '/widgets/levels.dart';
-import '/widgets/pause_menu.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'database/native.dart';
-import 'game_state.dart';
-import 'les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/database/connection/shared.dart';
+import 'package:les_mehdi_font_du_ski/game_state.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/widgets/enter_seed.dart';
+import 'package:les_mehdi_font_du_ski/widgets/highscore.dart';
+import 'package:les_mehdi_font_du_ski/widgets/levels.dart';
+import 'package:les_mehdi_font_du_ski/widgets/pause_menu.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
