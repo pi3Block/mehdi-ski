@@ -106,7 +106,7 @@ class MehdiSkiJoystickPlayer extends SpriteAnimationGroupComponent with HasGameR
         parentSize: size,
       ),
     );
-    _particelOffset = Vector2(size.x * 0.4, size.y * 0.8);
+    _particelOffset = Vector2(size.x * 0.1, size.y * -0.2);
   }
 
   bool get _isJoyStickIdle => joystick.direction == JoystickDirection.idle;
