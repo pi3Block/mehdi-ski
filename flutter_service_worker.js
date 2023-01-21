@@ -1,0 +1,225 @@
+'use strict';
+const MANIFEST = 'flutter-app-manifest';
+const TEMP = 'flutter-temp-cache';
+const CACHE_NAME = 'flutter-app-cache';
+const RESOURCES = {
+  "sql-wasm.js": "ae7f97c3e8695a30c1ecb294affa311b",
+"flutter.js": "f85e6fb278b0fd20c349186fb46ae36d",
+"sql-wasm.wasm": "51739179fd57f102da5297192df613e7",
+"index.html": "7358076e32b39944a889a6fc87a1981e",
+"/": "7358076e32b39944a889a6fc87a1981e",
+"main.dart.js": "fe9462c4be514ace3a432d9bf2745808",
+"manifest.json": "eac21df292bbd79d92bef508a18c45eb",
+"favicon.png": "5dcef449791fa27946b3d35ad8803796",
+"icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
+"icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
+"icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
+"icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
+"assets/FontManifest.json": "54303a54b78e68529502494bc41c9cc6",
+"assets/NOTICES": "af05a2911d38769ef6eb12f58d29b5bc",
+"assets/fonts/MaterialIcons-Regular.otf": "95db9098c58fd6db106f1116bae85a0b",
+"assets/shaders/ink_sparkle.frag": "ab4751ef630837e294889ca64470bb70",
+"assets/assets/images/joint-empty.png": "a16bdbc2182b3f8ba92cabf49a4aadbc",
+"assets/assets/images/TreeSpriteSheet2.png": "61bca6b4549b5e5fa1e4e84968c62f83",
+"assets/assets/images/explosion-3.png": "78af09f1d513689631488b5746aa385b",
+"assets/assets/images/joint-full.png": "ac7028088ff42dec4d6fbc23e9309f12",
+"assets/assets/images/TreeSpriteSheet4.png": "858e7b7f784384833be07c5c38b542ef",
+"assets/assets/images/player-sprite.png": "a40b37dc5f10f738e4e7550f559f92bd",
+"assets/assets/images/joystick_2.png": "63d9ebbe96ee5bc90d30ace210a1daec",
+"assets/assets/images/player.png": "fe28e301569a4e84a2090ad626d4498d",
+"assets/assets/images/arbre.png": "c699e958a1037e5d707f4fb06aa9fd4d",
+"assets/assets/images/energyball_fuel.png": "dc8fb59497a31be80c0df6bc9936ca8f",
+"assets/assets/images/joystick.png": "390f09c57d03f62f8fed3aa477f524a7",
+"assets/assets/images/skieur_400-495-reso100-150.png": "9dcb5818b7ae8e676a6a22b12d0b4037",
+"assets/assets/images/TreeSpriteSheet3.png": "eebb66e4e0b02c4770ef5a0e6ef21a3c",
+"assets/assets/images/PauseButton.png": "66dd3821b3484729b2e5c677e0ca7bff",
+"assets/assets/images/joint_aie_anim150.150.png": "336096c72c5744792537c18463f54900",
+"assets/assets/images/drapeau_double.png": "9a2f810ddd142db3492d67830de2962b",
+"assets/assets/images/sangoku-pixel.png": "68a62f33bb71b6521a6eb9a5d28347c6",
+"assets/assets/images/PauseButtonInvert.png": "179f233e200ec33152e8b8b63dafddf3",
+"assets/assets/images/ship_spritesheet.png": "f33f4832e77d160275c1cb6de6e77c1e",
+"assets/assets/images/TreeSpriteSheet.png": "0f26f42c5e64730d4feb35255560ffec",
+"assets/assets/images/drapeau.png": "e588fd96662cafca0a9bd5f53d7c0875",
+"assets/assets/images/drapeau_double_green.png": "536cd5aaccc19a8dc780548f2b6c69b6",
+"assets/assets/images/joint_full_ani150.150.png": "8285f51aa9f5637da164a66aaaa1dd42",
+"assets/assets/audio/engine.mp3": "72f53e28d479795c7250225f044b2fda",
+"assets/assets/audio/atari_boom5.mp3": "a4b5ca43bb562ba0e0f93049eca3ebb3",
+"assets/assets/font/AldotheApache.ttf": "9c3f8e8826b7813fad3ff5bf79f2004e",
+"assets/AssetManifest.json": "8b8cbd8e1f13c64c5d398d3a7327739d",
+"canvaskit/canvaskit.wasm": "bf50631470eb967688cca13ee181af62",
+"canvaskit/canvaskit.js": "2bc454a691c631b07a9307ac4ca47797",
+"canvaskit/profiling/canvaskit.wasm": "95a45378b69e77af5ed2bc72b2209b94",
+"canvaskit/profiling/canvaskit.js": "38164e5a72bdad0faa4ce740c9b8e564",
+"version.json": "0e364fbf951dcdb002a88ed843a46a65"
+};
+
+// The application shell files that are downloaded before a service worker can
+// start.
+const CORE = [
+  "main.dart.js",
+"index.html",
+"assets/AssetManifest.json",
+"assets/FontManifest.json"];
+// During install, the TEMP cache is populated with the application shell files.
+self.addEventListener("install", (event) => {
+  self.skipWaiting();
+  return event.waitUntil(
+    caches.open(TEMP).then((cache) => {
+      return cache.addAll(
+        CORE.map((value) => new Request(value, {'cache': 'reload'})));
+    })
+  );
+});
+
+// During activate, the cache is populated with the temp files downloaded in
+// install. If this service worker is upgrading from one with a saved
+// MANIFEST, then use this to retain unchanged resource files.
+self.addEventListener("activate", function(event) {
+  return event.waitUntil(async function() {
+    try {
+      var contentCache = await caches.open(CACHE_NAME);
+      var tempCache = await caches.open(TEMP);
+      var manifestCache = await caches.open(MANIFEST);
+      var manifest = await manifestCache.match('manifest');
+      // When there is no prior manifest, clear the entire cache.
+      if (!manifest) {
+        await caches.delete(CACHE_NAME);
+        contentCache = await caches.open(CACHE_NAME);
+        for (var request of await tempCache.keys()) {
+          var response = await tempCache.match(request);
+          await contentCache.put(request, response);
+        }
+        await caches.delete(TEMP);
+        // Save the manifest to make future upgrades efficient.
+        await manifestCache.put('manifest', new Response(JSON.stringify(RESOURCES)));
+        return;
+      }
+      var oldManifest = await manifest.json();
+      var origin = self.location.origin;
+      for (var request of await contentCache.keys()) {
+        var key = request.url.substring(origin.length + 1);
+        if (key == "") {
+          key = "/";
+        }
+        // If a resource from the old manifest is not in the new cache, or if
+        // the MD5 sum has changed, delete it. Otherwise the resource is left
+        // in the cache and can be reused by the new service worker.
+        if (!RESOURCES[key] || RESOURCES[key] != oldManifest[key]) {
+          await contentCache.delete(request);
+        }
+      }
+      // Populate the cache with the app shell TEMP files, potentially overwriting
+      // cache files preserved above.
+      for (var request of await tempCache.keys()) {
+        var response = await tempCache.match(request);
+        await contentCache.put(request, response);
+      }
+      await caches.delete(TEMP);
+      // Save the manifest to make future upgrades efficient.
+      await manifestCache.put('manifest', new Response(JSON.stringify(RESOURCES)));
+      return;
+    } catch (err) {
+      // On an unhandled exception the state of the cache cannot be guaranteed.
+      console.error('Failed to upgrade service worker: ' + err);
+      await caches.delete(CACHE_NAME);
+      await caches.delete(TEMP);
+      await caches.delete(MANIFEST);
+    }
+  }());
+});
+
+// The fetch handler redirects requests for RESOURCE files to the service
+// worker cache.
+self.addEventListener("fetch", (event) => {
+  if (event.request.method !== 'GET') {
+    return;
+  }
+  var origin = self.location.origin;
+  var key = event.request.url.substring(origin.length + 1);
+  // Redirect URLs to the index.html
+  if (key.indexOf('?v=') != -1) {
+    key = key.split('?v=')[0];
+  }
+  if (event.request.url == origin || event.request.url.startsWith(origin + '/#') || key == '') {
+    key = '/';
+  }
+  // If the URL is not the RESOURCE list then return to signal that the
+  // browser should take over.
+  if (!RESOURCES[key]) {
+    return;
+  }
+  // If the URL is the index.html, perform an online-first request.
+  if (key == '/') {
+    return onlineFirst(event);
+  }
+  event.respondWith(caches.open(CACHE_NAME)
+    .then((cache) =>  {
+      return cache.match(event.request).then((response) => {
+        // Either respond with the cached resource, or perform a fetch and
+        // lazily populate the cache only if the resource was successfully fetched.
+        return response || fetch(event.request).then((response) => {
+          if (response && Boolean(response.ok)) {
+            cache.put(event.request, response.clone());
+          }
+          return response;
+        });
+      })
+    })
+  );
+});
+
+self.addEventListener('message', (event) => {
+  // SkipWaiting can be used to immediately activate a waiting service worker.
+  // This will also require a page refresh triggered by the main worker.
+  if (event.data === 'skipWaiting') {
+    self.skipWaiting();
+    return;
+  }
+  if (event.data === 'downloadOffline') {
+    downloadOffline();
+    return;
+  }
+});
+
+// Download offline will check the RESOURCES for all files not in the cache
+// and populate them.
+async function downloadOffline() {
+  var resources = [];
+  var contentCache = await caches.open(CACHE_NAME);
+  var currentContent = {};
+  for (var request of await contentCache.keys()) {
+    var key = request.url.substring(origin.length + 1);
+    if (key == "") {
+      key = "/";
+    }
+    currentContent[key] = true;
+  }
+  for (var resourceKey of Object.keys(RESOURCES)) {
+    if (!currentContent[resourceKey]) {
+      resources.push(resourceKey);
+    }
+  }
+  return contentCache.addAll(resources);
+}
+
+// Attempt to download the resource online before falling back to
+// the offline cache.
+function onlineFirst(event) {
+  return event.respondWith(
+    fetch(event.request).then((response) => {
+      return caches.open(CACHE_NAME).then((cache) => {
+        cache.put(event.request, response.clone());
+        return response;
+      });
+    }).catch((error) => {
+      return caches.open(CACHE_NAME).then((cache) => {
+        return cache.match(event.request).then((response) => {
+          if (response != null) {
+            return response;
+          }
+          throw error;
+        });
+      });
+    })
+  );
+}
