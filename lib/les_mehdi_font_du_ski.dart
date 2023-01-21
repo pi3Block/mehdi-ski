@@ -17,8 +17,8 @@ import 'package:les_mehdi_font_du_ski/overlays/joint.dart';
 class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTappables, HasKeyboardHandlerComponents, HasDraggables {
   Vector2 _mehdiStartPosition = Vector2(0, 0);
   Vector2 get mehdiStartPosition => _mehdiStartPosition;
-  int health = 2;
-  int speed = 0;
+  int health = 1;
+  int speed = 10;
   int tempo = 0;
   bool win = false;
 
@@ -119,12 +119,12 @@ class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTap
     //overlays.addListener(onOverlayChanged);
 
     for (var i = 1; i <= health; i++) {
-      final positionX = (size.x - 20) - (40 * i);
+      final positionX = (size.x - 20) - (70 * i);
       await add(
         JointHealthComponent(
           jointNumber: i,
-          position: Vector2(positionX.toDouble(), 5),
-          size: Vector2(32, 48),
+          position: Vector2(positionX.toDouble(), 10),
+          size: Vector2(60, 70),
         ),
       );
     }
@@ -168,7 +168,7 @@ class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTap
   }
 
   void reset() {
-    health = 2;
+    health = 1;
     win = false;
     initializeGame(false);
   }

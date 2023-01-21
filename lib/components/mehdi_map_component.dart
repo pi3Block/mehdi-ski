@@ -36,7 +36,7 @@ class MehdiMapComponent extends Component with HasGameRef<LesMehdiFontDuSkiGame>
     children.register<Drapeau>();
     // Size of a single item in the grid.
     final itemSize = gameRef.size.clone()..divide(MehdiMapComponent.grid);
-    final amountOfDrapeauSpot = 5;
+    final amountOfDrapeauSpot = 6;
 
     List<PositionComponent> monTerrain = TerrainGenerator(
       size: Vector2(grid.x, heightOfMap),

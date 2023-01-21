@@ -106,26 +106,34 @@ class TerrainGenerator {
     //Landing spot
     final departIndex = 5;
 
-//Drapeau
+//Drapeau gestion du Y fonction de la taille.y et du nombre de drapeau
     final drapeauSpots = <Drapeau>[];
-    while (drapeauSpots.length < amountOfDrapeauSpot) {
-      final xDrapeau = _random.nextInt(size.x.toInt());
-      final yDrapeau = _random.nextInt(size.y.toInt());
-      if (!drapeauSpots.any((element) => element.position.y == yDrapeau.toDouble() / itemSize.y)) {
-        drapeauSpots.add(
-          Drapeau(
-            position: Vector2(
-              xDrapeau.toDouble() * itemSize.x,
-              yDrapeau.toDouble() * itemSize.y,
-            ),
-          ),
-        );
-      }
-    }
+    double drapeauDelta = (size.y) / amountOfDrapeauSpot;
+    final drapeauDepartY = 10.0;
+    final drapeauFinY = (size.y) - (10.0);
 
-    //Todo A revoir
-    //Dernier drapeaux est arrivée
-    drapeauSpots.first.isGoal = true;
+    int xDrapeau = _random.nextInt(size.x.toInt());
+    int yDrapeau = 20;
+
+    for (var i = 1; i <= amountOfDrapeauSpot; i++) {
+      Drapeau tempDrapeau = Drapeau(
+        position: Vector2(
+          xDrapeau.toDouble() * itemSize.x,
+          drapeauDelta * itemSize.x,
+        ),
+      );
+      if (i == 1) {
+        tempDrapeau.y = drapeauDepartY * itemSize.y;
+        tempDrapeau.isStart = true;
+      } else if (i == amountOfDrapeauSpot) {
+        tempDrapeau.y = drapeauFinY * itemSize.y;
+        tempDrapeau.isWin = true;
+      }
+
+      drapeauSpots.add(tempDrapeau);
+      drapeauDelta += size.y / amountOfDrapeauSpot;
+      //Si = 0
+    }
 
     //PowerUp
 /*     final powerUps = <PositionComponent>[];
@@ -211,6 +219,22 @@ class TerrainGenerator {
       }
       pointsGauche.add(Vector2(montagneGaucheX, ligne));
       pointsDroite.add(Vector2(montagneDroiteX, ligne));
+    }
+
+    //Parcours du nombre de drapeau
+    // Parcours de la ligne gauche
+    //Si drapeaux X < montagne x
+    //Si drapreau y
+    double lastPointG = 0.0;
+    for (var i = 0; i < drapeauSpots.length; i++) {
+      for (var pointG in pointsGauche) {
+        var interTest = (drapeauSpots[i].y / itemSize.y);
+
+        if (lastPointG <= interTest && interTest <= pointG.y) {
+          drapeauSpots[i].x = (pointG.x + 4) * itemSize.x;
+        }
+        lastPointG = pointG.y;
+      }
     }
 
     return [

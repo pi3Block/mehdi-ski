@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
+import 'package:les_mehdi_font_du_ski/game_state.dart';
 import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 enum JointState {
@@ -48,11 +49,11 @@ class JointHealthComponent extends SpriteAnimationGroupComponent<JointState> wit
 
   @override
   void update(double dt) {
-/*     if (game.health < jointNumber) {
+    if (GameState.playState == PlayingState.lost) {
       current = JointState.unavailable;
     } else {
       current = JointState.available;
-    } */
+    }
     super.update(dt);
   }
 

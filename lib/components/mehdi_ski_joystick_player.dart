@@ -2,6 +2,8 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
+import 'package:les_mehdi_font_du_ski/components/arbre.dart';
+import 'package:les_mehdi_font_du_ski/components/drapeau.dart';
 import 'package:les_mehdi_font_du_ski/components/explosion_component.dart';
 import 'package:les_mehdi_font_du_ski/components/line_component.dart';
 import 'package:les_mehdi_font_du_ski/components/map_component.dart';
@@ -243,6 +245,18 @@ class MehdiSkiJoystickPlayer extends SpriteAnimationGroupComponent with HasGameR
     }
   }
 
+/*   @override
+  void onCollisionEnd(PositionComponent other) {
+    if (other is Arbre) {
+      if (gameRef.health < 0) {
+        _loose();
+      } else {
+        gameRef.health--;
+      }
+    }
+    super.onCollisionEnd(other);
+  } */
+
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (_collisionActive) {
@@ -285,16 +299,23 @@ class MehdiSkiJoystickPlayer extends SpriteAnimationGroupComponent with HasGameR
       }
       if (crashed) {
         _loose();
-      } else {
+      }
+    } else if (other is Drapeau) {
+      if (other.isWin) {
         _win(other);
+      }
+    } else if (other is Arbre) {
+      gameRef.health--;
+      if (gameRef.health == 0 || gameRef.health < 0) {
+        _loose();
       }
     }
 
     super.onCollision(intersectionPoints, other);
   }
 
-  void _win(LineComponent landingSpot) {
-    _calculateScore(landingSpot);
+  void _win(Drapeau drapeau) {
+    _calculateScore(drapeau);
     _velocity.scale(0);
     _collisionActive = true;
     current = MehdiState.idle;
@@ -310,10 +331,13 @@ class MehdiSkiJoystickPlayer extends SpriteAnimationGroupComponent with HasGameR
     GameState.database.createNewHighScoreEntry(GameState.seed, GameState.lastScore);
   }
 
-  void _calculateScore(LineComponent landingSpot) {
-    final landingSpotScore = landingSpot.score;
+  void _calculateScore(Drapeau drapeau) {
+    //Todo ajouter score de drapeaux
+    //final drapeau = drapeau.score;
 
-    GameState.lastScore = (fuel * (_velocity.y.abs() * speed) * landingSpotScore) ~/ _flyingTime;
+    //GameState.lastScore = (_flyingTime * (_velocity.y.abs() * speed) * landingSpotScore) ~/ fuel;
+
+    GameState.lastScore = 1000 * fuel.toInt();
   }
 
   void _loose() {

@@ -2,6 +2,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
+import 'package:les_mehdi_font_du_ski/components/map_component.dart';
 import 'package:les_mehdi_font_du_ski/components/mehdi_ski_joystick_player.dart';
 import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
@@ -13,7 +14,8 @@ enum DrapeauState {
 class Drapeau extends SpriteAnimationGroupComponent<DrapeauState> with HasGameRef<LesMehdiFontDuSkiGame>, CollisionCallbacks {
   /// Indicates if this line is the end goal or not.
   /// //Tdo a retirer et mettre dans flag
-  late bool isGoal = false;
+  late bool isWin = false;
+  late bool isStart = false;
 
   final _collisionStartColor = Colors.red;
   final _defaultColor = Colors.cyan;
@@ -87,21 +89,27 @@ class Drapeau extends SpriteAnimationGroupComponent<DrapeauState> with HasGameRe
     Set<Vector2> intersectionPoints,
     PositionComponent other,
   ) {
-    super.onCollisionStart(intersectionPoints, other);
     hitbox.paint.color = _collisionStartColor;
     if (other is MehdiSkiJoystickPlayer) {
       current = DrapeauState.Passed;
-      if (isGoal) {
+      if (isWin) {
         gameRef.win = true;
       }
     }
+    super.onCollisionStart(intersectionPoints, other);
   }
 
   @override
   void onCollisionEnd(PositionComponent other) {
-    super.onCollisionEnd(other);
     if (!isColliding) {
       hitbox.paint.color = _defaultColor;
     }
+    super.onCollisionEnd(other);
+  }
+
+  @override
+  String toString() {
+    // TODO: implement toString
+    return [this.x.toString(), this.y.toString()].toString();
   }
 }
