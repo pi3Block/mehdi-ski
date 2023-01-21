@@ -14,7 +14,7 @@ import 'package:les_mehdi_font_du_ski/widgets/pause_menu.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Flame.device.setLandscape();
+  await Flame.device.setPortrait();
   await Flame.device.fullScreen();
   GameState.database = constructDb();
   GameState.seed = 'FlameRocks';

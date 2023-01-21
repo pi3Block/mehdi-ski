@@ -335,7 +335,7 @@ class MehdiSkiJoystickPlayer extends SpriteAnimationGroupComponent with HasGameR
 
   /// Restart the rocket.
   void reset() {
-    position = Vector2((gameRef.size.x / 2), (gameRef.size.y / 20));
+    position = gameRef.mehdiStartPosition;
     _collisionActive = false;
     _velocity.scale(0);
     current = MehdiState.idle;

@@ -33,7 +33,7 @@ class MapComponent extends Component with HasGameRef<LesMehdiFontDuSkiGame> {
       addAll(
         TerrainGenerator(
           size: Vector2(lengthOfMap, grid.y),
-          amountOfLandingSpots: 10,
+          //amountOfLandingSpots: 10,
           amountOfTree: 10,
           amountOfDrapeauSpot: 5,
           amountOfPowerups: 5,

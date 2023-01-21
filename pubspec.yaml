@@ -1,6 +1,6 @@
 name: les_mehdi_font_du_ski
 description: Les Mehdi Font Du Ski
-version: 0.1.2
+version: 0.1.3
 publish_to: none
 
 environment:
@@ -13,6 +13,7 @@ dependencies:
   flame: ^1.6.0
   flame_audio: ^1.3.5
   drift: ^1.3.0
+  sqlite3_flutter_libs: ^0.5.12
   flutter_colorpicker: ^1.0.3
   intl: ^0.17.0
 
