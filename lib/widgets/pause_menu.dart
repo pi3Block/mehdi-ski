@@ -140,9 +140,9 @@ class _PauseMenuState extends State<PauseMenu> {
     if (GameState.playState == PlayingState.paused) {
       return 'Pause';
     } else if (GameState.playState == PlayingState.lost) {
-      return 'Game over';
+      return 'Ton Mehdi est mort !';
     } else {
-      return 'Winner Score: ${GameState.lastScore?.toStringAsFixed(0)}';
+      return 'Ton Mehdi à fait un score de : ${GameState.lastScore?.toStringAsFixed(0)}';
     }
   }
 }

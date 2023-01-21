@@ -23,10 +23,25 @@ class Arbre extends SpriteAnimationComponent with HasGameRef<LesMehdiFontDuSkiGa
     );
     animation = spriteSheet.createAnimation(row: 0, stepTime: 0.3, to: 6);
     position = position;
-    size = Vector2(16, 30);
+    size = Vector2(20, 45);
     final hitboxPaint = BasicPalette.white.paint()..style = PaintingStyle.stroke;
-    add(
-      PolygonHitbox.relative(
+    if (gameRef.debugMode) {
+      add(
+        PolygonHitbox.relative(
+          [
+            Vector2(0.0, -0.8),
+            Vector2(-0.8, 0.1),
+            Vector2(-0.5, 0.3),
+            Vector2(0.0, 1.0),
+            Vector2(0.8, 0.1),
+          ],
+          parentSize: size,
+        )
+          ..paint = hitboxPaint
+          ..renderShape = true,
+      );
+    } else {
+      add(PolygonHitbox.relative(
         [
           Vector2(0.0, -0.8),
           Vector2(-0.8, 0.1),
@@ -35,10 +50,8 @@ class Arbre extends SpriteAnimationComponent with HasGameRef<LesMehdiFontDuSkiGa
           Vector2(0.8, 0.1),
         ],
         parentSize: size,
-      )
-        ..paint = hitboxPaint
-        ..renderShape = true,
-    );
+      ));
+    }
   }
 
   @override

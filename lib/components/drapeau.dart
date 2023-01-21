@@ -37,9 +37,14 @@ class Drapeau extends SpriteAnimationGroupComponent<DrapeauState> with HasGameRe
     final defaultPaint = Paint()
       ..color = _defaultColor
       ..style = PaintingStyle.stroke;
-    hitbox = RectangleHitbox()
-      ..paint = defaultPaint
-      ..renderShape = true;
+    if (gameRef.debugMode) {
+      hitbox = RectangleHitbox()
+        ..paint = defaultPaint
+        ..renderShape = true;
+    } else {
+      hitbox = RectangleHitbox();
+    }
+
     add(hitbox);
 
     final spriteSheet = SpriteSheet(

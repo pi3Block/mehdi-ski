@@ -21,7 +21,7 @@ class ParticelGenerator {
         child: CircleParticle(
           radius: 1,
           //Random color between yellow and red
-          paint: Paint()..color = Color.lerp(Colors.yellow, Colors.red, _random.nextDouble())!,
+          paint: Paint()..color = Color.lerp(Color.fromARGB(255, 17, 4, 198), Color.fromARGB(255, 243, 236, 235), _random.nextDouble())!,
         ),
       ),
     );
