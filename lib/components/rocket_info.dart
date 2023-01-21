@@ -1,6 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import '/components/rocket_component.dart';
+import 'package:les_mehdi_font_du_ski/components/rocket_component.dart';
 
 /// Draw the stats of our rocket.
 class RocketInfo extends PositionComponent with HasGameRef {

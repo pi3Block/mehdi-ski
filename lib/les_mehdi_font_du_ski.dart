@@ -1,22 +1,22 @@
 import 'dart:math';
 
 import 'package:flame/input.dart';
+import 'package:les_mehdi_font_du_ski/components/audio_player.dart';
 import 'package:les_mehdi_font_du_ski/components/mehdiSki_info.dart';
 
-import '/overlays/joint.dart';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
-
-import 'components/mehdi_ski_joystick_player.dart';
-import 'components/audio_player.dart';
-import 'components/mehdi_map_component.dart';
-
-import 'components/pause_component.dart';
-import 'game_state.dart';
+import 'package:les_mehdi_font_du_ski/components/mehdi_map_component.dart';
+import 'package:les_mehdi_font_du_ski/components/mehdi_ski_joystick_player.dart';
+import 'package:les_mehdi_font_du_ski/components/pause_component.dart';
+import 'package:les_mehdi_font_du_ski/game_state.dart';
+import 'package:les_mehdi_font_du_ski/overlays/joint.dart';
 
 class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTappables, HasKeyboardHandlerComponents, HasDraggables {
+  Vector2 _mehdiStartPosition = Vector2(0, 0);
+  Vector2 get mehdiStartPosition => _mehdiStartPosition;
   int health = 2;
   int speed = 0;
   int tempo = 0;
@@ -48,7 +48,7 @@ class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTap
     await images.load('joystick.png');
     //camera.viewport = FixedHorizontalResolutionViewport(1200);
     //camera.viewport = FixedVerticalResolutionViewport(800);
-    camera.viewport = FixedResolutionViewport(Vector2(800, 1000));
+    camera.viewport = FixedResolutionViewport(Vector2(800, 1200));
     //Init and load the audio assets
     audioPlayer = MehdiSkiGameAudioPlayer();
     await audioPlayer.loadAssets();
@@ -69,6 +69,9 @@ class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTap
       rows: 1,
     );
 
+    children.register<MehdiMapComponent>();
+    await add(MehdiMapComponent(mapSeed: GameState.seed.hashCode));
+
     ///Ensure our joystick knob is between 50 and 100 based on view height
     ///Important its based on device size not viewport size
     ///8.2 is the "magic" hud joystick factor... ;)
@@ -85,19 +88,6 @@ class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTap
       ),
       margin: const EdgeInsets.only(left: 40, bottom: 40),
     );
-
-    _player = MehdiSkiJoystickPlayer(
-      position: Vector2((size.x / 2), (size.y / 20)),
-      size: Vector2(32, 48),
-      joystick: joystick,
-    );
-
-    camera.followComponent(_player, relativeOffset: Anchor(0.5, 0.2));
-    await add(_player);
-    await add(joystick);
-    children.register<MehdiMapComponent>();
-    await add(MehdiMapComponent(mapSeed: GameState.seed.hashCode));
-    await add(MehdiSkiInfo(_player));
 
     await add(
       PauseComponent(
@@ -139,6 +129,11 @@ class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTap
       );
     }
 
+    _player = MehdiSkiJoystickPlayer(
+      position: _mehdiStartPosition,
+      size: Vector2(32, 52),
+      joystick: joystick,
+    );
 /*     add(JointHealthComponent(
       jointNumber: 3,
       position: Vector2((size.x - ((size.x) / 10)), (size.y - ((size.y) / 10))),
@@ -148,8 +143,11 @@ class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTap
       add(Hud());
     }
  */
-    //Todo retirer
-    add(ScreenHitbox());
+    camera.followComponent(_player, relativeOffset: Anchor(0.5, 0.2));
+    await add(_player);
+    await add(joystick);
+
+    await add(MehdiSkiInfo(_player));
 
     add(TimerComponent(
       period: 10,
@@ -202,5 +200,9 @@ class LesMehdiFontDuSkiGame extends FlameGame with HasCollisionDetection, HasTap
       GameState.playState = PlayingState.paused;
       pauseEngine();
     }
+  }
+
+  void set mehdiStartPosition(Vector2 mehdiStartPosition) {
+    _mehdiStartPosition = mehdiStartPosition;
   }
 }

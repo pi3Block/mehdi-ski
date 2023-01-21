@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import '../les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 /// An explosion from https://ansimuz.itch.io/explosion-animations-pack.
 class ExplosionComponent extends SpriteAnimationComponent with HasGameRef<LesMehdiFontDuSkiGame> {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '/game_state.dart';
-import '../database/database.dart';
-
-import '../les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/database/database.dart';
+import 'package:les_mehdi_font_du_ski/game_state.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 /// Overview widget of all the scores.
 class HighscoreOverview extends StatefulWidget {

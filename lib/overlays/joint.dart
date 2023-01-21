@@ -1,7 +1,7 @@
-import '/les_mehdi_font_du_ski.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 enum JointState {
   available,

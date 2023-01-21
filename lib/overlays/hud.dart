@@ -1,7 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-
-import '../les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 class Hud extends PositionComponent with HasGameRef<LesMehdiFontDuSkiGame> {
   Hud({

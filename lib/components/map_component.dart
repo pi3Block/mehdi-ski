@@ -1,10 +1,10 @@
 import 'dart:async';
-import '/components/powerup_component.dart';
-import '/terrain_generator.dart';
+
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-
-import '../les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/components/powerup_component.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/terrain_generator.dart';
 
 /// Map rendering component.
 class MapComponent extends Component with HasGameRef<LesMehdiFontDuSkiGame> {
@@ -33,7 +33,7 @@ class MapComponent extends Component with HasGameRef<LesMehdiFontDuSkiGame> {
       addAll(
         TerrainGenerator(
           size: Vector2(lengthOfMap, grid.y),
-          amountOfLandingSpots: 10,
+          //amountOfLandingSpots: 10,
           amountOfTree: 10,
           amountOfDrapeauSpot: 5,
           amountOfPowerups: 5,

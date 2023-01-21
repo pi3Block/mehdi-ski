@@ -1,13 +1,13 @@
-import '/components/explosion_component.dart';
-import '/components/line_component.dart';
-import '/components/particel_generator.dart';
-import '/game_state.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
-import '../les_mehdi_font_du_ski.dart';
-import 'map_component.dart';
+import 'package:les_mehdi_font_du_ski/components/explosion_component.dart';
+import 'package:les_mehdi_font_du_ski/components/line_component.dart';
+import 'package:les_mehdi_font_du_ski/components/map_component.dart';
+import 'package:les_mehdi_font_du_ski/components/particel_generator.dart';
+import 'package:les_mehdi_font_du_ski/game_state.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 /// Describes the render state of the [MehdiComponent].
 enum MehdiState {
@@ -335,7 +335,7 @@ class MehdiSkiJoystickPlayer extends SpriteAnimationGroupComponent with HasGameR
 
   /// Restart the rocket.
   void reset() {
-    position = Vector2((gameRef.size.x / 2), (gameRef.size.y / 20));
+    position = gameRef.mehdiStartPosition;
     _collisionActive = false;
     _velocity.scale(0);
     current = MehdiState.idle;

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '/database/database.dart';
-import '/game_state.dart';
-
-import '../les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/database/database.dart';
+import 'package:les_mehdi_font_du_ski/game_state.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 /// Show a level selection screen as a grid with fixed amount of columns.
 class LevelSelection extends StatefulWidget {

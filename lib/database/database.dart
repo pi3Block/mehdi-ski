@@ -1,7 +1,9 @@
 import 'dart:math';
-import '/database/highscore.dart';
-import '/database/level.dart';
+
 import 'package:drift/drift.dart';
+
+import 'highscore.dart';
+import 'level.dart';
 
 part 'database.g.dart';
 
@@ -14,9 +16,9 @@ part 'database.g.dart';
 )
 
 ///The main class
-class MehdiSkiGameDatabase extends _$MehdiSkiGameDatabase {
+class MehdiSkiDatabase extends _$MehdiSkiDatabase {
   ///Tell the database where to store the data with this constructor
-  MehdiSkiGameDatabase(QueryExecutor e) : super(e);
+  MehdiSkiDatabase(QueryExecutor e) : super(e);
 
   // You should bump this number whenever you change or add a table definition.
   @override

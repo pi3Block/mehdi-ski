@@ -6,13 +6,12 @@ import 'package:flame/extensions.dart';
 import 'package:flame/sprite.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '/components/explosion_component.dart';
-import '/components/line_component.dart';
-import '/components/map_component.dart';
-import '/components/particel_generator.dart';
-import '/game_state.dart';
-
-import '../les_mehdi_font_du_ski.dart';
+import 'package:les_mehdi_font_du_ski/components/explosion_component.dart';
+import 'package:les_mehdi_font_du_ski/components/line_component.dart';
+import 'package:les_mehdi_font_du_ski/components/map_component.dart';
+import 'package:les_mehdi_font_du_ski/components/particel_generator.dart';
+import 'package:les_mehdi_font_du_ski/game_state.dart';
+import 'package:les_mehdi_font_du_ski/les_mehdi_font_du_ski.dart';
 
 /// Describes the render state of the [RocketComponent].
 enum RocketState {

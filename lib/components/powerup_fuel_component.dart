@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flame/game.dart';
-import '/components/mehdi_ski_joystick_player.dart';
-import '/components/powerup_component.dart';
+import 'package:les_mehdi_font_du_ski/components/mehdi_ski_joystick_player.dart';
+import 'package:les_mehdi_font_du_ski/components/powerup_component.dart';
 
 ///A power up that adds fuel to the rocket on touch
 class PowerupFuelComponent extends PowerupComponent {

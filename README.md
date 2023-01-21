@@ -1,16 +1,11 @@
 # les_mehdi_font_du_ski
 
-A new Flutter project.
+Pour mon pote Mehdi! 
 
-## Getting Started
+Jeux de ski réalisé avec :
 
-This project is a starting point for a Flutter application.
+Flutter : https://docs.flutter.dev 
 
-A few resources to get you started if this is your first Flutter project:
+Flame : https://docs.flame-engine.org/1.6.0/index.html 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Flutter gh page : https://github.com/bluefireteam/flutter-gh-pages

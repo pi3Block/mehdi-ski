@@ -12,5 +12,6 @@ class Highscore extends Table {
   IntColumn get score => integer().nullable()();
 
   ///Datetime the high score with entered
-  DateTimeColumn get creationDate => dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get creationDate =>
+      dateTime().withDefault(currentDateAndTime)();
 }

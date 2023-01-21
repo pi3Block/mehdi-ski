@@ -4,8 +4,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:les_mehdi_font_du_ski/components/arbre.dart';
 import 'package:les_mehdi_font_du_ski/components/drapeau.dart';
-
-import 'components/line_component.dart';
+import 'package:les_mehdi_font_du_ski/components/line_component.dart';
 
 /// Terrain generator.
 ///
@@ -18,7 +17,7 @@ class TerrainGenerator {
     this.largeurMontagne = 5.0,
     required this.size,
     this.seed,
-    required this.amountOfLandingSpots,
+//    required this.amountOfLandingSpots,
     required this.amountOfDrapeauSpot,
     required this.amountOfPowerups,
     required this.amountOfTree,
@@ -38,9 +37,9 @@ class TerrainGenerator {
 
   /// The amount a step can change.
   final double largeurMontagne;
-
+/* 
   /// Amount of landing spots the terrain will generate.
-  final int amountOfLandingSpots;
+  final int amountOfLandingSpots; */
 
   /// Amount of landing spots the terrain will generate.
   final int amountOfDrapeauSpot;
@@ -84,7 +83,6 @@ class TerrainGenerator {
     var premierDeltaMontagne = milieu;
     var DeltaMontagne = (_random.nextDouble() * montagneGaucheX).clamp(minEntreWidthMontagneX, maxEntreWidthMontagneX);
     var montagneDroiteX = max - montagneGaucheX;
-
     // Montagne droite entre  size.x/2 et size.x
 /*     var montagneDroiteX = milieu - (_random.nextDouble() * (milieu)); */
     //Si montagne droite - montagne gauche > min
@@ -105,15 +103,8 @@ class TerrainGenerator {
     final pointsGauche = <Vector2>[];
 
     final pointsDroite = <Vector2>[];
-
-/* //Landing spot
-    final landingSpots = <int>[];
-    while (landingSpots.length < amountOfLandingSpots) {
-      final index = _random.nextInt(size.y.toInt());
-      if (!landingSpots.contains(index)) {
-        landingSpots.add(index);
-      }
-    } */
+    //Landing spot
+    final departIndex = 5;
 
 //Drapeau
     final drapeauSpots = <Drapeau>[];
@@ -131,6 +122,8 @@ class TerrainGenerator {
         );
       }
     }
+
+    //Todo A revoir
     //Dernier drapeaux est arrivée
     drapeauSpots.first.isGoal = true;
 
@@ -225,13 +218,13 @@ class TerrainGenerator {
         LineComponent(
           pointsGauche[i - 1],
           pointsGauche[i],
-          //isGoal: landingSpots.contains(i),
+          isGoal: departIndex == i,
         ),
       for (var i = 1; i < pointsDroite.length; i++)
         LineComponent(
           pointsDroite[i - 1],
           pointsDroite[i],
-          //isGoal: landingSpots.contains(i),
+          isGoal: departIndex == i,
         ),
       //...powerUps,
       ...arbres,
